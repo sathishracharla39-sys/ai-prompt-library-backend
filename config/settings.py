@@ -6,8 +6,6 @@ SECRET_KEY = 'django-insecure-change-this'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
 # ✅ REQUIRED
 ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
@@ -87,3 +85,9 @@ STATIC_URL = 'static/'
 
 # ✅ CORS FIX (VERY IMPORTANT)
 CORS_ALLOW_ALL_ORIGINS = True
+# existing code above...
+
+ALLOWED_HOSTS = ['*']
+
+import os
+PORT = os.environ.get('PORT', '8000')
