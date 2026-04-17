@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import prompt_list, prompt_detail
+from . import views
 
 urlpatterns = [
-    path('prompts/', prompt_list),
-    path('prompts/<int:id>/', prompt_detail),  # ⭐ id must match views
+    path('', views.prompt_list),
+    path('<int:id>/', views.prompt_detail),
 ]

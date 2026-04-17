@@ -10,11 +10,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
-# ✅ ROOT CONFIG
-ROOT_URLCONF = 'config.urls'
-WSGI_APPLICATION = 'config.wsgi.application'
-
-
 # ✅ INSTALLED APPS
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -30,7 +25,7 @@ INSTALLED_APPS = [
 ]
 
 
-# ✅ MIDDLEWARE (cors MUST be first)
+# ✅ MIDDLEWARE
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 
@@ -40,14 +35,19 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
 
-    'django.middleware.csrf.CsrfViewMiddleware',   # ✅ keep this
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 
-# ✅ TEMPLATES
+# ✅ ROOT + WSGI
+ROOT_URLCONF = 'config.urls'
+WSGI_APPLICATION = 'config.wsgi.application'
+
+
+# ✅ TEMPLATES (🔥 VERY IMPORTANT — FIXES YOUR ERROR)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -73,7 +73,7 @@ DATABASES = {
 }
 
 
-# ✅ PASSWORD VALIDATION
+# ✅ PASSWORD VALIDATION (required for admin)
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -90,7 +90,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# ✅ LANGUAGE
+# ✅ LANGUAGE SETTINGS
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -102,27 +102,12 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-# ✅ CORS (ALLOW FRONTEND)
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
-    "http://127.0.0.1:4200",
-    "https://prismatic-stardust-bd056a.netlify.app"
-]
-
-CORS_ALLOW_CREDENTIALS = True
+# ✅ CORS (allow frontend to talk to backend)
+CORS_ALLOW_ALL_ORIGINS = True
 
 
-# ✅ CSRF FIX (VERY IMPORTANT FOR POST)
+# ✅ CSRF TRUST (for deployment)
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:4200",
-    "http://127.0.0.1:4200",
-    "https://prismatic-stardust-bd056a.netlify.app"
+    "https://*.onrender.com",
+    "https://*.netlify.app"
 ]
-
-
-# ❌ DO NOT USE THIS
-# CORS_ALLOW_ALL_ORIGINS = True
-
-
-# ✅ PORT (optional)
-PORT = os.environ.get('PORT', '8000')
