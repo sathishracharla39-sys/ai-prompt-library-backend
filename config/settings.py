@@ -103,7 +103,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # ✅ CORS (allow frontend to talk to backend)
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "https://gorgeous-douhua-6112cc.netlify.app"
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 
 # ✅ CSRF TRUST (for deployment)
